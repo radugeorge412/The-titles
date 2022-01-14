@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="preconnect" href="//fonts.googleapis.com" />
+    <link rel="preconnect" href="//fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <title>{{title}}</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+      }
+      html {
+        font-size: 62.5%;
+        font-family: "Roboto", sans-serif;
+      }
+      .container {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      /* .left {
+        border: 1px solid black;
+      } */
+      main {
+        /* border: 1px solid blue; */
+        padding-left: 20px;
+        padding-right: 20px;
+        flex-grow: 1;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+      .no-scroll {
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .right {
+        /* border: 1px solid red; */
+        margin-right: 10px;
+        margin-top: 1.5rem;
+      }
+      @media screen and (max-width: 800px) {
+        main {
+          position: relative;
+          width: 93vw;
+        }
+      }
+      @media screen and (max-width: 480px) {
+        main {
+          display: inline-block;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <top-bar></top-bar>
+
+    <div class="container">
+      <div class="left">
+        {% for item in news[1] %} {{item | log}}
+        <menu-left .v="{{item}}"></menu-left>
+        {% endfor %}
+      </div>
+
+      <main tabindex="-1" id="main-content">
+        {% block content %}{% endblock %}
+      </main>
+
+      <div class="right">
+        <weather-widget cityTarget="Bucharest"></weather-widget>
+        <tag-container></tag-container>
+        <news-letter></news-letter>
+      </div>
+    </div>
+    <donate-popup></donate-popup>
+    <headline-popup></headline-popup>
+
+    <script type="module" src="../../app-lit.js"></script>
+    <script>
+      window.addEventListener("popup", () => {
+        document.getElementsByTagName("BODY")[0].classList.toggle("no-scroll");
+      });
+      window.addEventListener("closePop", () => {
+        document.getElementsByTagName("BODY")[0].classList.toggle("no-scroll");
+      });
+    </script>
+  </body>
+</html>

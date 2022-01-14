@@ -1,0 +1,23 @@
+{% extends "layouts/base.html" %} {% block content %} {{ content | safe }}
+<orizontal-menu></orizontal-menu>
+
+<div class="center">
+  <!-- {% for tag in collections.tags %}
+  <p>tag.data.title</p>
+  {% endfor %} -->
+
+  <breaking-news></breaking-news>
+  {% for item in news[0] %}
+  <news-headline
+    title="{{item.title}}"
+    agencyName="{{item.source.name}}"
+    id="{{loop.index}}"
+    image="{{item.urlToImage}}"
+    timeAgo="{{item.publishedAt}}"
+    description="{{item.description}}"
+  ></news-headline>
+
+  {% endfor %}
+</div>
+
+{% endblock %}
